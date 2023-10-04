@@ -13,7 +13,7 @@ import { pathRewriter, run } from './utils'
 import { Project, SourceFile, OutputFile } from 'ts-morph'
 import fs from 'fs/promises'
 import * as VueCompiler from '@vue/compiler-sfc'
-import pkg from '../packages/vue-force-graph/package.json'
+import pkg from '../packages/lifetoys-vue-force-graph/package.json'
 const { dependencies } = pkg
 async function buildEachComponent() {
     const files = glob.sync('*', {
@@ -26,7 +26,7 @@ async function buildEachComponent() {
             input,
             plugins: [nodeResolve(), vue(), ts(), css({ output: 'index.css' }), commonjs()],
             external: (id) => {
-                return /^vue/.test(id) || /^@vue-force-graph/.test(id) || Object.keys(dependencies).some(str => new RegExp(`^${str}$`).test(id))
+                return /^vue/.test(id) || /^@lifetoys-vue-force-graph/.test(id) || Object.keys(dependencies).some(str => new RegExp(`^${str}$`).test(id))
             },
             preserveSymlinks: false
         }
@@ -54,7 +54,7 @@ async function generateTypes() {
             outDir: path.resolve(outputDir, 'types'),
             baseUrl: projectRoot,
             paths: {
-                '@vue-force-graph/*': ["packages/*"]
+                '@lifetoys-vue-force-graph/*': ["packages/*"]
             },
             skipLibCheck: true,
             strict: false

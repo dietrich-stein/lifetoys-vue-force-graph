@@ -3,19 +3,20 @@ lifetoys-vue-force-graph
 
 ## Fork Notes
 
-This is a fork of the original Vue bindings for the 2D [force-graph](https://github.com/vasturiano/force-graph) here: [vue-force-graph](https://github.com/zjfcool/vue-force-graph). The purpose of this fork, at this time, is to remove the 3D and AR features and their dependencies. As such, some of the documentation below is likely to be somewhat inaccurate.
+This is a fork of the original Vue bindings for the 2D [force-graph](https://github.com/vasturiano/force-graph) here: [vue-force-graph](https://github.com/zjfcool/vue-force-graph). The purpose of this fork, at this time, is to remove the 3D, VR, and AR features and their dependencies. As such, some of the documentation below is likely to be somewhat inaccurate.
+
+- Use `pnpm install` instead of `npm` or else you need `workspaces` in the `package.json`.
 
 ## About
 
-Vue bindings for the **force-graph**  of components: [force-graph](https://github.com/vasturiano/force-graph) (2D HTML Canvas), [3d-force-graph](https://github.com/vasturiano/3d-force-graph) (ThreeJS/WebGL), [3d-force-graph-vr](https://github.com/vasturiano/3d-force-graph-vr) (A-Frame) and [3d-force-graph-ar](https://github.com/vasturiano/3d-force-graph-ar) (AR.js).
+Vue bindings for the **force-graph**  of components: [force-graph](https://github.com/vasturiano/force-graph) (2D HTML Canvas).
 
-![](https://github.com/zjfcool/vue-force-graph/blob/main/public/example.jpg)
+![](https://github.com/dietrich-stein/lifetoys-vue-force-graph/blob/main/public/example.jpg)
 
-This module exports 5 Vue components with identical interfaces: `VueForceGraph2D`, `VueForceGraph3D`, `VueForceGraphVR` , `VueForceGraphAR` and `GraphContextMenu`. Each can be used to represent a graph data structure in a 2 or 3-dimensional space using a force-directed iterative layout.
+This module exports a Vue component named `VueForceGraph2D` with interfaces than can be used to represent a graph data structure in a 2-dimensional space using a force-directed iterative layout.
 
-For dependency convenience, all of the components are also available as stand-alone packages: `vue-force-graph-2d`, `vue-force-graph-3d`, `vue-force-graph-vr` and `vue-force-graph-ar`.
+Uses canvas/WebGL for rendering and [d3-force-3d](https://github.com/vasturiano/d3-force-3d) for the underlying physics engine.
 
-Uses canvas/WebGL for rendering and [d3-force-3d](https://github.com/vasturiano/d3-force-3d) for the underlying physics engine. 
 Supports zooming/panning, node dragging and node/link hover/click interactions.
 
 ## Examples
@@ -24,20 +25,21 @@ Supports zooming/panning, node dragging and node/link hover/click interactions.
 
 ## Install
 ```shell
-npm install vue-force-graph
+npm install lifetoys-vue-force-graph
 ```
 
 ## Quick start
 
 ```javascript
-import { VueForceGraph2D, VueForceGraph3D, VueForceGraphVR, VueForceGraphAR, GraphContextMenu } from 'vue-force-graph';
-app.use(VueForceGraph3D)
+import { VueForceGraph2D, VueForceGraphContextMenu } from 'lifetoys-vue-force-graph';
+
+app.use(VueForceGraph2D)
 ```
 
 then
 
 ```
-<VueForceGraph3D
+<VueForceGraph2D
   graphData={myData}
 />
 ```
@@ -143,7 +145,7 @@ Note that not all props listed below apply to all 4 components. The last 4 colum
 | <b>scene</b> | *-* | Access the internal ThreeJS [Scene](https://threejs.org/docs/#api/scenes/Scene). | | :heavy_check_mark: | | |
 | <b>camera</b> | *-* | Access the internal ThreeJS [Camera](https://threejs.org/docs/#api/cameras/PerspectiveCamera). | | :heavy_check_mark: | | |
 | <b>renderer</b> | *-* | Access the internal ThreeJS [WebGL renderer](https://threejs.org/docs/#api/renderers/WebGLRenderer). | | :heavy_check_mark: | | |
-| <b>postProcessingComposer</b> | *-* | Access the [post-processing composer](https://threejs.org/docs/#examples/en/postprocessing/EffectComposer). Use this to add post-processing [rendering effects](https://github.com/mrdoob/three.js/tree/dev/examples/jsm/postprocessing) to the scene. By default the composer has a single pass ([RenderPass](https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/RenderPass.js)) that directly renders the scene without any effects. | | :heavy_check_mark: | | | 
+| <b>postProcessingComposer</b> | *-* | Access the [post-processing composer](https://threejs.org/docs/#examples/en/postprocessing/EffectComposer). Use this to add post-processing [rendering effects](https://github.com/mrdoob/three.js/tree/dev/examples/jsm/postprocessing) to the scene. By default the composer has a single pass ([RenderPass](https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/RenderPass.js)) that directly renders the scene without any effects. | | :heavy_check_mark: | | |
 | <b>controls</b> | *-* | Access the internal ThreeJS controls object. | | :heavy_check_mark: | | |
 | <b>refresh</b> | *-* | Redraws all the nodes/links. | | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 
@@ -206,30 +208,32 @@ Note that not all props listed below apply to all 4 components. The last 4 colum
 | <b>screen2GraphCoords</b> | (<i>x</i>, <i>y</i>[, <i>distance</i>]) | Utility method to translate viewport coordinates to the graph domain. Given a pair of `x`,`y` screen coordinates, and optionally distance from camera for 3D mode, returns the current equivalent `{x, y (, z)}` in the domain of graph node coordinates. | :heavy_check_mark: | :heavy_check_mark: | | |
 | <b>graph2ScreenCoords</b> | (<i>x</i>, <i>y</i>[, <i>z</i>]) | Utility method to translate node coordinates to the viewport domain. Given a set of `x`,`y`(,`z`) graph coordinates, returns the current equivalent `{x, y}` in viewport coordinates. | :heavy_check_mark: | :heavy_check_mark: | | |
 
-### GraphContextMenu Props
+### VueForceGraphContextMenu Props
 | Props  | Type   | Default |Description|
 |---|:--:|:---:|:--:|
 | bindType |`"canvas"|"node"|"edge"`| |
 | v-slot |object|  |`{graphContext,activeData,event}`|
-### GraphMenu Props
+
+### VueForceGraphMenuItem Props
 | Props  | Type   | Default |Description|
 |---|:--:|:---:|:--:|
 |change|event| |vue event props,arguments is `{activeData,event,graphContext,menuItem,}`|
 |data|`{id:string|number;label:string}[]`| |render list data|
+
 ### Input JSON syntax
 
 ```
 {
-    "nodes": [ 
-        { 
+    "nodes": [
+        {
           "id": "id1",
           "name": "name1",
-          "val": 1 
+          "val": 1
         },
-        { 
+        {
           "id": "id2",
           "name": "name2",
-          "val": 10 
+          "val": 10
         },
         (...)
     ],

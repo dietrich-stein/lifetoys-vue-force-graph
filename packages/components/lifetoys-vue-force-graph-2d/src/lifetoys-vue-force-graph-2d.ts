@@ -114,4 +114,5 @@ export const vueForceGraph2DProps = {
     onRenderFramePost: Function
 
 }
+
 export type VueForceGraph2DProps = ExtractPropTypes<typeof vueForceGraph2DProps>

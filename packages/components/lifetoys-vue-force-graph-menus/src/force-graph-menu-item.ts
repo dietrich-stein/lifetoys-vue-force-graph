@@ -1,6 +1,6 @@
 import type { ExtractPropTypes } from 'vue'
 
-export const menuProps = {
+export const menuItemProps = {
     data: {
         type: Array,
         default: () => [],
@@ -9,4 +9,4 @@ export const menuProps = {
         }
     }
 }
-export type MenuProps = ExtractPropTypes<typeof menuProps>
+export type MenuProps = ExtractPropTypes<typeof menuItemProps>

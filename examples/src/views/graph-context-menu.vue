@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { genRandomTree } from "../utils";
-import { GraphContextMenu, GraphMenu } from "vue-force-graph";
+import { VueForceGraphContextMenu, VueForceGraphMenuItem } from "lifetoys-vue-force-graph";
 const graphData = ref(genRandomTree());
-const is2D = ref(false);
 const nodeMenuData = ref([
   {
     id: "delete",
@@ -34,46 +33,24 @@ function edgeMenuChange(data) {
   console.log(data);
   alert(`action ${menuItem.label}`);
 }
-function toggle() {
-  is2D.value = !is2D.value;
-}
 </script>
 <template>
-  <div @click="toggle" class="toggle-btn">{{ is2D ? "3D" : "2D" }}</div>
-  <VueForceGraph3D
-    v-if="!is2D"
-    :graphData="graphData"
-    backgroundColor="#090723"
-  >
-    <GraphContextMenu bindType="node">
-      <GraphMenu :data="nodeMenuData" @change="nodeMenuChange"></GraphMenu>
-    </GraphContextMenu>
-    <GraphContextMenu v-slot="data" bindType="canvas">
-      <ul class="custom-menu-container">
-        <li @click="createNodeByCanvas(data)">创建</li>
-      </ul>
-    </GraphContextMenu>
-    <GraphContextMenu bindType="edge">
-      <GraphMenu :data="edgeMenuData" @change="edgeMenuChange"></GraphMenu>
-    </GraphContextMenu>
-  </VueForceGraph3D>
   <VueForceGraph2D
-    v-if="is2D"
     :graphData="graphData"
     backgroundColor="#090723"
     :linkColor="() => 'rgba(255,255,255,.2)'"
   >
-    <GraphContextMenu bindType="node">
-      <GraphMenu :data="nodeMenuData" @change="nodeMenuChange"></GraphMenu>
-    </GraphContextMenu>
-    <GraphContextMenu v-slot="data" bindType="canvas">
+    <VueForceGraphContextMenu bindType="node">
+      <VueForceGraphMenuItem :data="nodeMenuData" @change="nodeMenuChange"></VueForceGraphMenuItem>
+    </VueForceGraphContextMenu>
+    <VueForceGraphContextMenu v-slot="data" bindType="canvas">
       <ul class="custom-menu-container">
         <li @click="createNodeByCanvas(data)">创建</li>
       </ul>
-    </GraphContextMenu>
-    <GraphContextMenu bindType="edge">
-      <GraphMenu :data="edgeMenuData" @change="edgeMenuChange"></GraphMenu>
-    </GraphContextMenu>
+    </VueForceGraphContextMenu>
+    <VueForceGraphContextMenu bindType="edge">
+      <VueForceGraphMenuItem :data="edgeMenuData" @change="edgeMenuChange"></VueForceGraphMenuItem>
+    </VueForceGraphContextMenu>
   </VueForceGraph2D>
 </template>
 <style>

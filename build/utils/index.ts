@@ -13,12 +13,16 @@ export const run = async (command: string) => {
 
     })
 }
-export const withTaskName = <T>(name: string, fn: T) => Object.assign(fn, {
+export const withTaskName = <T extends {}>(name: string, fn: T) => Object.assign(fn, {
     displayName: name
-})
+});
+
 export const pathRewriter = (format: string) => {
     return (id: string) => {
-        id = id.replaceAll('@vue-force-graph', `vue-force-graph/${format}`)
+        id = id.replaceAll(
+            '@lifetoys-vue-force-graph',
+            `lifetoys-vue-force-graph/${format}`
+        );
         return id;
     }
 }

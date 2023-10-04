@@ -10,7 +10,7 @@ export const buildConfig = {
             path: path.resolve(outputDir, 'es')
         },
         bundle: {
-            path: 'vue-force-graph/es'
+            path: 'lifetoys-vue-force-graph/es'
         }
     },
     cjs: {
@@ -21,7 +21,7 @@ export const buildConfig = {
             path: path.resolve(outputDir, 'lib')
         },
         bundle: {
-            path: 'vue-force-graph/lib'
+            path: 'lifetoys-vue-force-graph/lib'
         }
     }
 }

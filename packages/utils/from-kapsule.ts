@@ -1,5 +1,6 @@
-import { defineComponent, ref, h, watchEffect, onMounted, DefineComponent, onBeforeUnmount } from 'vue'
-import { useProvider, useGraphContext } from './hooks'
+import { defineComponent, ref, h, watchEffect, onMounted, DefineComponent, onBeforeUnmount } from 'vue';
+import { useProvider, useGraphContext } from './hooks';
+
 function omit(target, args) {
     return Object.fromEntries(
         Object.keys(target)
@@ -9,6 +10,7 @@ function omit(target, args) {
             .map((k) => [k, target[k]])
     );
 }
+
 export interface ComboParamProps {
     wrapperElementType?: string;
     methodNames: string[];
@@ -16,6 +18,7 @@ export interface ComboParamProps {
     props: any;
     name: string;
 }
+
 export default function fromKapsule(kapsuleComponent: (options: any) => any, comboParam: ComboParamProps,): DefineComponent {
     const {
         wrapperElementType = 'div',

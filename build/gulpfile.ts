@@ -7,6 +7,7 @@ async function copySourceCode() {
     await run(`cp ${vueForceGraphRoot}/package.json ${outputDir}/package.json`)
     await run(`cp ${projectRoot}/README.md ${outputDir}/README.md`)
 }
+
 export default series(
     withTaskName('clean', async () => run('rm -rf ./dist')),
     parallel(
@@ -19,5 +20,6 @@ export default series(
         copySourceCode
     )
 )
-export * from './componet'
+
+export * from './component'
 export * from './full-component'

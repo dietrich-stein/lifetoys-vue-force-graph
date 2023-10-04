@@ -8,13 +8,6 @@ export const contextMenuProps = {
             return ["node", "edge", 'canvas'].includes(v)
         }
     },
-    mode: {
-        type: String,
-        default: '2d',
-        validator: (v) => {
-            return ['2d', '3d', 'ar', 'vr'].includes(v)
-        }
-    },
     width: {
         type: [Number, String],
         default: 'auto'
@@ -28,4 +21,5 @@ export const contextMenuProps = {
         default: "rgba(0,0,0,0)"
     }
 }
-export type ContextMenuProps = ExtractPropTypes<typeof contextMenuProps>
+
+export type VueForceGraphContextMenuProps = ExtractPropTypes<typeof contextMenuProps>

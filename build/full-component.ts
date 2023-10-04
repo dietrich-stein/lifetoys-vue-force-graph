@@ -10,7 +10,7 @@ import { parallel } from 'gulp'
 import fs from 'fs/promises'
 import { buildConfig } from './utils/config'
 import { pathRewriter } from './utils'
-import pkg from '../packages/vue-force-graph/package.json'
+import pkg from '../packages/lifetoys-vue-force-graph/package.json'
 const { dependencies } = pkg
 
 async function buildFull() {
@@ -26,7 +26,7 @@ async function buildFull() {
         {
             format: "umd",
             file: path.resolve(outputDir, 'index.js'),
-            name: "VueForceGraph",
+            name: "VueForceGraph2D",
             exports: "named",
             globals: {
                 vue: 'Vue'
@@ -52,7 +52,7 @@ async function buildEntry() {
     const config = {
         input: entryPoints,
         plugins: [nodeResolve(), vue(), typescript()],
-        external: (id) => /^vue/.test(id) || /^@vue-force-graph/.test(id) || Object.keys(dependencies).some(str => new RegExp(`^${str}$`).test(id))
+        external: (id) => /^vue/.test(id) || /^@lifetoys-vue-force-graph/.test(id) || Object.keys(dependencies).some(str => new RegExp(`^${str}$`).test(id))
     }
     const bundle = await rollup(config)
     return Promise.all(
@@ -64,7 +64,5 @@ async function buildEntry() {
         })).map(option => bundle.write(option as OutputOptions))
     )
 }
-
-
 
 export const buildFullComponent = parallel(buildFull, buildEntry)

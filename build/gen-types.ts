@@ -41,7 +41,7 @@ async function genEntryTypes() {
         for (const outputFile of emitOutput.getOutputFiles()) {
             const filePath = outputFile.getFilePath()
             await fs.mkdir(path.dirname(filePath), { recursive: true })
-            await fs.writeFile(filePath, outputFile.getText().replaceAll('@vue-force-graph', '.'))
+            await fs.writeFile(filePath, outputFile.getText().replaceAll('@lifetoys-vue-force-graph', '.'))
         }
     })
     await Promise.all(tasks)

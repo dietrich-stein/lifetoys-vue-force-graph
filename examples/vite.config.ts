@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
   console.log(env);
   const isProd = env.VITE_MODE === "production";
   return {
-    base: isProd ? "/vue-force-graph/" : "/",
+    base: isProd ? "/lifetoys-vue-force-graph/" : "/",
     plugins: [vue()],
     server: {
       port: 4000,

@@ -1,10 +1,10 @@
 <script lang="ts">
-import fromKapsule from "@vue-force-graph/utils/from-kapsule";
-import ForceGraph2D from "force-graph";
+import fromKapsule from "@lifetoys-vue-force-graph/utils/from-kapsule";
+import ForceGraph from "force-graph";
 // @ts-ignore
-import { vueForceGraph2DProps } from "./vue-force-graph-2d.ts";
+import { vueForceGraph2DProps } from "./lifetoys-vue-force-graph-2d.ts";
 
-export default fromKapsule(ForceGraph2D, {
+export default fromKapsule(ForceGraph, {
   methodNames: [
     // bind methods
     "emitParticle",

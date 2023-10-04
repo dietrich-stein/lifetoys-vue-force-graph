@@ -1,17 +1,16 @@
 <template>
-  <div class="toggle-btn" @click="toggle">{{ is2D ? "3D" : "2D" }}</div>
-  <VueForceGraph2D v-if="is2D" :graphData="graphData">
-    <GraphContextMenu v-slot="data" bindType="canvas">
+  <VueForceGraph2D :graphData="graphData">
+    <VueForceGraphContextMenu v-slot="data" bindType="canvas">
       <ul>
         <li @click="actionHandle(data)">hello</li>
       </ul>
-    </GraphContextMenu>
-    <GraphContextMenu bindType="node">
-      <GraphMenu :data="menuData" @change="menuChange">hello</GraphMenu>
-    </GraphContextMenu>
-    <GraphContextMenu v-slot="data" bindType="edge">
+    </VueForceGraphContextMenu>
+    <VueForceGraphContextMenu bindType="node">
+      <VueForceGraphMenuItem :data="menuData" @change="menuChange">hello</VueForceGraphMenuItem>
+    </VueForceGraphContextMenu>
+    <VueForceGraphContextMenu v-slot="data" bindType="edge">
       <div @click="deleteItem(data)">sfsf</div>
-    </GraphContextMenu>
+    </VueForceGraphContextMenu>
   </VueForceGraph2D>
 </template>
 <script lang="ts">
@@ -31,7 +30,6 @@ export default defineComponent({
   setup() {
     const state = reactive({
       graphData: genRandomTree(40),
-      is2D: false,
       menuData: [
         {
           id: "delete",
@@ -77,9 +75,6 @@ export default defineComponent({
     const getLinkColor = (link) => {
       return "rgb(178, 255, 221)";
     };
-    const toggle = () => {
-      state.is2D = !state.is2D;
-    };
     return {
       ...toRefs(state),
       deleteItem,
@@ -87,7 +82,6 @@ export default defineComponent({
       actionHandle,
       getNodeColor,
       getLinkColor,
-      toggle,
     };
   },
 });
@@ -101,21 +95,5 @@ html {
   overflow: hidden;
   margin: 0;
   padding: 0;
-}
-.toggle-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #000;
-  box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.3),
-    -1px -1px 5px rgba(255, 255, 255, 0.3);
-  z-index: 9;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-  cursor: pointer;
 }
 </style>

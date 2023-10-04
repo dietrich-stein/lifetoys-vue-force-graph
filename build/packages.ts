@@ -9,8 +9,15 @@ export const buildPackages = (pkgPath: string, pkgName: string) => {
         const output = path.resolve(pkgPath, config.output.name)
         return series(
             withTaskName(`build:${pkgName}`, () => {
-                const tsConfigPath = path.resolve(projectRoot, 'tsconfig.json')
-                const inputs = ['**/*.ts', '!gulpfile.ts', '!node_modules', path.resolve(projectRoot, 'typings', '*.d.ts'),]
+                const tsConfigPath = path.resolve(projectRoot, 'tsconfig.json');
+
+                const inputs = [
+                    '**/*.ts',
+                    '!gulpfile.ts',
+                    '!node_modules',
+                    path.resolve(projectRoot, 'typings', '*.d.ts'),
+                ];
+
                 return src(inputs).pipe(
                     ts.createProject(tsConfigPath, {
                         module: config.module,
@@ -20,6 +27,7 @@ export const buildPackages = (pkgPath: string, pkgName: string) => {
                     })()
                 ).pipe(dest(output))
             }),
+
             withTaskName(`copy:${pkgName}`, () => {
                 return src(`${output}/**`).pipe(dest(
                     path.resolve(outputDir, config.output.name, pkgName)

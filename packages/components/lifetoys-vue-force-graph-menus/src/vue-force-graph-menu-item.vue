@@ -13,13 +13,13 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useInjector, useMenuData } from "@vue-force-graph/utils/hooks";
+import { useInjector, useMenuData } from "@lifetoys-vue-force-graph/utils/hooks";
 // @ts-ignore
-import { menuProps } from "./menu.ts";
+import { menuItemProps } from "./force-graph-menu-item.ts";
 
 export default defineComponent({
-  name: "GraphMenu",
-  props: menuProps,
+  name: "VueForceGraphMenuItem",
+  props: menuItemProps,
   emits: ["change"],
   setup(_, { emit }) {
     const data = useInjector(useMenuData.token) as any;

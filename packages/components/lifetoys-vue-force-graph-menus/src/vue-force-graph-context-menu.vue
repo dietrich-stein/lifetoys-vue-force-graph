@@ -33,12 +33,12 @@ import {
   useGraphContext,
   useProvider,
   useMenuData,
-} from "@vue-force-graph/utils/hooks";
+} from "@lifetoys-vue-force-graph/utils/hooks";
 //@ts-ignore
-import { contextMenuProps } from "./context-menu.ts";
+import { contextMenuProps } from "./force-graph-context-menu.ts";
 
 export default defineComponent({
-  name: "GraphContextMenu",
+  name: "VueForceGraphContextMenu",
   props: contextMenuProps,
   setup(props) {
     const menuContainerRef = ref();
@@ -65,12 +65,12 @@ export default defineComponent({
     const resetContainerPosition = () => {
       let x = 0,
         y = 0;
-      if (props.mode === "3d" || props.mode === "2d") {
-        if (state.xyz.every((v) => !v)) return;
-        const g = graphContext.graph2ScreenCoords(...state.xyz);
-        x = g.x;
-        y = g.y;
-      }
+
+      if (state.xyz.every((v) => !v)) return;
+      const g = graphContext.graph2ScreenCoords(...state.xyz);
+      x = g.x;
+      y = g.y;
+
       if (state.visible) {
         setContainerPosition(x, y);
       } else {
