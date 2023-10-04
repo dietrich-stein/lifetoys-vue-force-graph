@@ -1,31 +1,5 @@
 <template>
   <div class="toggle-btn" @click="toggle">{{ is2D ? "3D" : "2D" }}</div>
-  <VueForceGraph3D
-    v-if="!is2D"
-    :graphData="graphData"
-    :nodeColor="getNodeColor"
-    nodeLabel="id"
-    :nodeOpacity="1"
-    :linkColor="getLinkColor"
-    :linkWidth="5"
-    :linkOpacity="0.2"
-    linkLabel="id"
-    :linkDirectionalArrowLength="3.5"
-    :linkDirectionalArrowRelPos="1"
-    :linkCurvature="0.25"
-  >
-    <GraphContextMenu v-slot="data" bindType="canvas">
-      <div style="background: red; color: green" @click="deleteItem(data)">
-        删除
-      </div>
-    </GraphContextMenu>
-    <GraphContextMenu bindType="node">
-      <GraphMenu :data="menuData" @change="menuChange">hello</GraphMenu>
-    </GraphContextMenu>
-    <GraphContextMenu bindType="edge">
-      <GraphMenu :data="menuData" @change="menuChange">hello</GraphMenu>
-    </GraphContextMenu>
-  </VueForceGraph3D>
   <VueForceGraph2D v-if="is2D" :graphData="graphData">
     <GraphContextMenu v-slot="data" bindType="canvas">
       <ul>
@@ -39,9 +13,6 @@
       <div @click="deleteItem(data)">sfsf</div>
     </GraphContextMenu>
   </VueForceGraph2D>
-
-  <!-- <VueForceGraphAR :graphData="graphData"></VueForceGraphAR> -->
-  <!-- <VueForceGraphVR :graphData="graphData"></VueForceGraphVR> -->
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
