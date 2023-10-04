@@ -1,5 +1,11 @@
-vue-force-graph
+lifetoys-vue-force-graph
 =================
+
+## Fork Notes
+
+This is a fork of the original Vue bindings for the 2D [force-graph](https://github.com/vasturiano/force-graph) here: [vue-force-graph](https://github.com/zjfcool/vue-force-graph). The purpose of this fork, at this time, is to remove the 3D and AR features and their dependencies. As such, some of the documentation below is likely to be somewhat inaccurate.
+
+## About
 
 Vue bindings for the **force-graph**  of components: [force-graph](https://github.com/vasturiano/force-graph) (2D HTML Canvas), [3d-force-graph](https://github.com/vasturiano/3d-force-graph) (ThreeJS/WebGL), [3d-force-graph-vr](https://github.com/vasturiano/3d-force-graph-vr) (A-Frame) and [3d-force-graph-ar](https://github.com/vasturiano/3d-force-graph-ar) (AR.js).
 
